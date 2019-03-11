@@ -1,47 +1,19 @@
-
-with open('test4.csv', 'r') as test:
+import re
+with open('test3.csv', 'r') as test:
     obj = []
 
     csv = test.read()
 
-    test = csv.split('\n', 1)
-    key, prop = test
+    key, info = csv.split('\n', 1)
+    key = key.split(',')
+    # print(info)
+    parsedInfo = re.findall(
+        '[a-zA-Z0-9\s:]+|"[\s0-9a-zA-Z,]+"', info)
 
-    propList = []
+    print(len(key))
 
-    while(len(prop) > 0):
-        if prop[0] == '"':
-            try:
-                wordInQuote, rest = prop[1:].split('",', 1)
-                wordInQuote = wordInQuote.replace('\n', '')
-                propList.append(wordInQuote)
-                prop = rest
-            except ValueError:
-                wordInQuote = prop[1:-1].replace('\n', '')
-                print(wordInQuote)
-                propList.append(wordInQuote)
-                prop = []
+    for word in parsedInfo:
+        parsedInfo.extend(word.split('\r\n'))
 
-        else:
-            nextWord, rest = prop.split(',', 1)
-
-            propList.append(nextWord)
-
-            prop = rest
-        print(propList)
-
-    # restText = "".join(b)
-    # print(restText)
-
-    # c, *d = b
-    # print(a)
-    # key = key.split(',')
-    # resultObj = {}
-    # result = c.split(',')
-
-    # resultObj = dict(zip(key, result))
-    # print(resultObj)
-    # resultObj[x] = result[index]
-    # print(resultObj)
-    # b.split(',')
-    # print(b)
+    print(len(parsedInfo))
+    print(parsedInfo)
