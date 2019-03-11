@@ -12,8 +12,9 @@ with open('test3.csv', 'r') as test:
 
     print(len(key))
 
-    for word in parsedInfo:
-        parsedInfo.extend(word.split('\r\n'))
+    newInfo = []
+    for i in parsedInfo:
+        newInfo += (i.split('\r\n'))
 
-    print(len(parsedInfo))
-    print(parsedInfo)
+    print(len(newInfo))
+    # print(parsedInfo)
